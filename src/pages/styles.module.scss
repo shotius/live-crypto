@@ -1,0 +1,23 @@
+.container {
+  background-image: url("https://incyber.fr/wp-content/uploads/2021/08/ARTICLE-CRYPTO-2-1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.cryptoList {
+  padding: 48px;
+  margin: 0;
+}
+
+.cryptoItem {
+  text-decoration: none;
+  list-style: none;
+  padding: 16px;
+  border: 1px solid black;
+}
+
+
+.cryptoItem:hover {
+  background-color: azure;
+}
