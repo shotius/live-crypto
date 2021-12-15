@@ -1,23 +1,30 @@
 .container {
-  background-image: url("https://incyber.fr/wp-content/uploads/2021/08/ARTICLE-CRYPTO-2-1.png");
+  background-image: url('https://incyber.fr/wp-content/uploads/2021/08/ARTICLE-CRYPTO-2-1.png');
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: 50vh;
 }
 
-.cryptoList {
-  padding: 48px;
-  margin: 0;
+.cryptoTable {
+  margin-top: 48px;
+  border-collapse: collapse;
+  width: 100%;
+  tr {
+    border-top: 1px solid #dedede;
+    border-width: 1px 0px;
+    &:hover {
+      background-color: #f4f4f4;
+    }
+  }
+  td {
+    padding: 24px;
+    cursor: pointer;
+    text-align: start;
+  }
 }
 
-.cryptoItem {
-  text-decoration: none;
-  list-style: none;
-  padding: 16px;
-  border: 1px solid black;
-}
-
-
-.cryptoItem:hover {
-  background-color: azure;
+@media only screen and (min-width: 900px) {
+  .container {
+    height: 100vh;
+  }
 }
