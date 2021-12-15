@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles.scss';
 
 interface buttonPrimaryProps {}
 
@@ -6,5 +7,9 @@ export const ButtonPrimary: React.FC<buttonPrimaryProps> = ({
   children,
   ...rest
 }) => {
-  return <button {...rest}>{children}</button>;
+  return (
+    <button className="btn-primary" {...rest}>
+      {children}
+    </button>
+  );
 };

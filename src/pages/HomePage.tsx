@@ -9,13 +9,13 @@ export const HomePage: React.FC<HomePageProps> = ({}) => {
       <div className={container}></div>
       <div className="innerContainer">
         <table className={cryptoTable}>
-          <thead>
-            <th style={{ textAlign: 'start', padding: '24px' }}>Coin</th>
-            <th style={{ textAlign: 'start', padding: '24px' }}>7 day graph</th>
-            <th style={{ textAlign: 'start', padding: '24px' }}>Price</th>
-            <th style={{ textAlign: 'start', padding: '24px' }}>24h</th>
-            <th style={{ textAlign: 'start', padding: '24px' }}>market cap</th>
-          </thead>
+          <tr>
+            <th>Coin</th>
+            <th>7 day graph</th>
+            <th>Price</th>
+            <th>24h</th>
+            <th>market cap</th>
+          </tr>
           <tbody>
             <tr>
               <td>Bitcoin</td>

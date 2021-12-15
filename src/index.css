@@ -30,3 +30,10 @@ body {
     padding: 0 24px;
   }
 }
+
+@media only screen and (min-width: 1380px) {
+  .innerContainer {
+    max-width: 1180px;
+    padding: 0 24px;
+  }
+}

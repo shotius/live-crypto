@@ -16,10 +16,14 @@
       background-color: #f4f4f4;
     }
   }
-  td {
+  td,
+  th {
     padding: 24px;
     cursor: pointer;
     text-align: start;
+  }
+  th {
+    cursor: default
   }
 }
 
