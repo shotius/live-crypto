@@ -10,4 +10,5 @@ export interface CryptoCoin {
 
 export interface CrypotoState {
   cryptoCoins: CryptoCoin[];
+  fetchingCryptoCoins: boolean
 }

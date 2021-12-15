@@ -1,50 +1,56 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch } from '../redux/app/hook';
+import { getCryptoCoins } from '../redux/features/cryptoSlice';
+import { CryptoCoin } from '../redux/types';
 import { container, cryptoTable } from './styles.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 interface HomePageProps {}
 
 export const HomePage: React.FC<HomePageProps> = ({}) => {
+  const [coins, setCoins] = useState<CryptoCoin[]>([]);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getCryptoCoins())
+      .unwrap()
+      .then((data) => setCoins(data));
+  }, []);
+
   return (
     <div>
       <div className={container}></div>
       <div className="innerContainer">
         <table className={cryptoTable}>
-          <tr>
-            <th>Coin</th>
-            <th>7 day graph</th>
-            <th>Price</th>
-            <th>24h</th>
-            <th>market cap</th>
-          </tr>
           <tbody>
-            <tr>
-              <td>Bitcoin</td>
-              <td>some graph</td>
-              <td>Usd 4723442</td>
-              <td>-3.15%</td>
-              <td>usd 234234,.234.234</td>
+            <tr style={{ border: 'none' }}>
+              <th>Coin</th>
+              <th>7 day graph</th>
+              <th>Price</th>
+              <th>24h</th>
+              <th>market cap</th>
             </tr>
-            <tr>
-              <td>Bitcoin</td>
-              <td>some graph</td>
-              <td>Usd 4723442</td>
-              <td>-3.15%</td>
-              <td>usd 234234,.234.234</td>
-            </tr>
-            <tr>
-              <td>Bitcoin</td>
-              <td>some graph</td>
-              <td>Usd 4723442</td>
-              <td>-3.15%</td>
-              <td>usd 234234,.234.234</td>
-            </tr>
-            <tr>
-              <td>Bitcoin</td>
-              <td>some graph</td>
-              <td>Usd 4723442</td>
-              <td>-3.15%</td>
-              <td>usd 234234,.234.234</td>
-            </tr>
+          </tbody>
+          <tbody>
+            {coins.map((coin) => (
+              <tr key={coin.id} onClick={() => navigate(`/live/${coin.id}`)}>
+                <td
+                  style={{
+                    display: "flex", 
+                    alignItems: "center", 
+                    gap: "16px"
+                  }}
+                >
+                  <img src={coin.image} width="35px" />
+                  {coin.name}
+                </td>
+                <td>some graph</td>
+                <td>USD {coin.current_price}</td>
+                <td>{coin.price_change_percentage_24h}%</td>
+                <td>USD {coin.market_cap}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
