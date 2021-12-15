@@ -1,0 +1,16 @@
+.cover_full {
+  height: 50vh;
+}
+.cover_medium {
+  width: '100%';
+  height: '50vh';
+}
+
+@media only screen and (min-width: 900px) {
+  .cover_full {
+    height: 100vh;
+  }
+  .cover_medium {
+    height: 80vh;
+  }
+}

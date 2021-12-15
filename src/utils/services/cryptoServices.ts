@@ -1,4 +1,4 @@
-import { CryptoCoin } from './../../redux/types';
+import { CryptoCoin, IGetSingleCar } from './../../redux/types';
 import axios from 'axios';
 
 const getCryptoCoins = async () => {
@@ -9,7 +9,34 @@ const getCryptoCoins = async () => {
   return data as CryptoCoin[];
 };
 
+/**
+ *
+ * @param id - name of the crypto coin
+ * @param currency
+ * @param days
+ * @param interval
+ * @returns {IGetSingleCar}: single coin info
+ */
+const getCharData = async ({
+  id,
+  currency = 'usd',
+  days = 7,
+  interval = 'daily',
+}: IGetSingleCar): Promise<CryptoCoin> => {
+  const url = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency}&days=${days}&interval=${interval}`;
+  const { data } = await axios.get(url);
+  return data as CryptoCoin;
+};
+
+const getSingleCoinInfo = async (id: string) => {
+  const url = `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&community_data=false&developer_data=false&sparkline=false`;
+  const { data } = await axios.get(url);
+  return data;
+};
+
 const cryptoServices = {
   getCryptoCoins,
+  getCharData,
+  getSingleCoinInfo,
 };
 export default cryptoServices;

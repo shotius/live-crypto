@@ -10,5 +10,13 @@ export interface CryptoCoin {
 
 export interface CrypotoState {
   cryptoCoins: CryptoCoin[];
-  fetchingCryptoCoins: boolean
+  fetchingCryptoCoins: boolean;
+  fetchingSingleCoin: boolean;
+}
+
+export interface IGetSingleCar {
+  id: string;
+  currency?: string;
+  days?: number;
+  interval?: 'daily' | 'minutely' | 'hourly';
 }

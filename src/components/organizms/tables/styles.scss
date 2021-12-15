@@ -1,0 +1,44 @@
+.chart_table {
+  width: 100%;
+  border-collapse: collapse;
+  td,
+  th {
+    text-align: center;
+    padding: 16px;
+  }
+  tr {
+    &:first-child {
+      background-color: #f0f0f0;
+    }
+  }
+}
+
+
+.coins_table {
+  margin-top: 48px;
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 700px;
+  tr {
+    border-top: 1px solid #dedede;
+    border-width: 1px 0px;
+    &:hover {
+      background-color: #f4f4f4;
+    }
+    &:first-child {
+      border: none;
+    }
+    &:first-child:hover {
+      background-color: transparent;
+    }
+  }
+  td,
+  th {
+    padding: 24px;
+    cursor: pointer;
+    text-align: start;
+  }
+  th {
+    cursor: default;
+  }
+}
