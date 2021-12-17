@@ -21,16 +21,12 @@ export const HomePage: React.FC<HomePageProps> = ({}) => {
 
   return (
     <>
-    
       <CoverImage
         variant="full"
         image="https://incyber.fr/wp-content/uploads/2021/08/ARTICLE-CRYPTO-2-1.png"
       />
-      <div>hereee</div>
       <HorizontalScrollable>
-        <div>here</div>
         <CointainerInner>
-          <div>here</div>
           <CoinsTable coins={coins} />
         </CointainerInner>
       </HorizontalScrollable>

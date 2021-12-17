@@ -1,3 +1,4 @@
+import { ChartOptions } from 'chart.js';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../redux/app/hook';
@@ -26,6 +27,7 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
     selectedCurrency,
     priciesData,
     fetchingSingleCoin,
+    savedPrices,
   } = useAppSelector((state) => state.coins);
   const { coinId } = useParams<{ coinId: string }>();
 
@@ -40,6 +42,10 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
   const labels =
     selectedDateRange === 'DAY' ? hours : days(Days[selectedDateRange]);
 
+  const isSavedPrice = (pr: number) => {
+    return savedPrices.find((price) => price === pr);
+  };
+  const pointColors = priciesData.map((price) => isSavedPrice(price) ? "red": "#fff");
   const data = {
     labels,
     datasets: [
@@ -48,6 +54,9 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
         data: priciesData,
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        pointBackgroundColor: pointColors,
+        lineTension: 0.1,
+        pointHoverRadius: 5,
       },
     ],
   };

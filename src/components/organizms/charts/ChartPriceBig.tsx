@@ -8,14 +8,15 @@ import {
   Title,
   Tooltip,
 } from 'chart.js';
-import React from 'react';
-import { Line } from 'react-chartjs-2';
-import { useAppSelector } from '../../../redux/app/hook';
+import React, { useRef } from 'react';
+import { getElementAtEvent, Line } from 'react-chartjs-2';
+import { useAppDispatch, useAppSelector } from '../../../redux/app/hook';
+import { addPoint, removePoint } from '../../../redux/features/cryptoSlice';
+import { ChartOptions } from '../../../redux/types';
+import { getCurrencyIcon } from '../../../utils/functions/getCurrencyIcon';
+import { parseToString } from '../../../utils/functions/parsers';
 import { ChartHeader } from '../headers/ChartHeader';
 import './styles.scss';
-
-type LineProps = React.ComponentProps<typeof Line>
-type Options = LineProps['options']
 
 ChartJS.register(
   CategoryScale,
@@ -33,51 +34,77 @@ interface PriceChartBigProps {
 }
 
 export const ChartPriceBig: React.FC<PriceChartBigProps> = ({ coin, data }) => {
-  const { selectedDateRange } = useAppSelector((state) => state.coins);
-  const options: Options = {
+  const { selectedDateRange, selectedCurrency } = useAppSelector(
+    (state) => state.coins
+  );
+  const options: ChartOptions = {
     responsive: true,
     scales: {
       y: {
         title: {
-          display: true, 
-          text: "Price"
-        }
-      }, 
+          display: true,
+          text: 'Price',
+        },
+      },
       x: {
         title: {
-          display: true, 
-          text: selectedDateRange === 'DAY' ? 'Hours' : 'Days'
-        }
-      }, 
-      
-    }, 
+          display: true,
+          text: selectedDateRange === 'DAY' ? 'Hours' : 'Days',
+        },
+      },
+    },
     plugins: {
       legend: {
         display: false,
       },
       tooltip: {
         callbacks: {
-          label: function (context: any) {
-            let label = context.dataset.label || '';
-  
-            if (label) {
-              label += ': ';
+          title: function (context) {
+            let title = context[0].label;
+            const price = context[0].raw as number
+
+            if (selectedDateRange === 'DAY') {
+              parseInt(title) < 12 ? (title += ' AM') : (title += ' PM');
             }
-            if (context.parsed.y !== null) {
-              label = 'shotius';
-              // label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed.y);
+
+            if (savedPrices.includes(price)) {
+              title +=" წითელი ფასი"
             }
-            console.log('labeL', label);
+            return title;
+          },
+          label: function (context) {
+            let label = parseToString(context.raw) || '';
+            console.log();
+            label
+              ? (label = `${getCurrencyIcon(selectedCurrency)} ${label}`)
+              : (label = 'no data');
             return label;
           },
         },
       },
     },
   };
+
+  const lineRef = useRef<any>();
+  const dispatch = useAppDispatch();
+  const { savedPrices } = useAppSelector((state) => state.coins);
+
+  const onClick = (event: any) => {
+    // get point on click
+    const point = getElementAtEvent(lineRef.current, event);
+    //@ts-ignore
+    const price = point[0]['element']['$context']['raw'];
+
+    const includes = savedPrices.find((pr) => pr === price);
+
+    // if point is saved remove else add
+    includes ? dispatch(removePoint(price)) : dispatch(addPoint(price));
+  };
+
   return (
     <div className="wrapper">
       <ChartHeader coin={coin} />
-      <Line data={data} options={options} />
+      <Line data={data} options={options} onClick={onClick} ref={lineRef} />
     </div>
   );
 };

@@ -11,6 +11,7 @@ const initialState: CrypotoState = {
   selectedCurrency: 'usd',
   selectedDateRange: 'DAY',
   priciesData: [],
+  savedPrices: [],
 };
 
 /**
@@ -75,6 +76,14 @@ const cryptoSlice = createSlice({
     setDateRange: (state, action: PayloadAction<IDateRange>) => {
       state.selectedDateRange = action.payload;
     },
+    addPoint: (state, action: PayloadAction<number>) => {
+      state.savedPrices = state.savedPrices.concat(action.payload);
+    },
+    removePoint: (state, action: PayloadAction<number>) => {
+      state.savedPrices = state.savedPrices.filter(
+        (price) => price !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     // -- Multiple coins
@@ -106,5 +115,6 @@ const cryptoSlice = createSlice({
   },
 });
 
-export const { setCurrency, setDateRange } = cryptoSlice.actions;
+export const { setCurrency, setDateRange, addPoint, removePoint } =
+  cryptoSlice.actions;
 export default cryptoSlice.reducer;

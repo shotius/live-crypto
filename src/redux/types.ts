@@ -1,3 +1,5 @@
+import { Line } from "react-chartjs-2";
+
 export interface CryptoCoin {
   id: string;
   symbol: string;
@@ -15,7 +17,8 @@ export interface CrypotoState {
 
   selectedCurrency: ICurrency;
   selectedDateRange: IDateRange; 
-  priciesData: number[]
+  priciesData: number[], 
+  savedPrices: number[]
 }
 
 export interface IGetSingleCar {
@@ -29,3 +32,8 @@ export interface IGetSingleCar {
 export type IDateRange = 'MONTH' | 'WEEK' | 'DAY';
 
 export type ICurrency = 'usd' | 'eur'
+
+
+export type ChartLineProps = React.ComponentProps<typeof Line>;
+export type ChartOptions = ChartLineProps['options'];
+export type ChartData = ChartLineProps['data'];
