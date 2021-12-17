@@ -10,6 +10,7 @@ const initialState: CrypotoState = {
 
   selectedCurrency: 'usd',
   selectedDateRange: 'DAY',
+  priciesData: [],
 };
 
 /**
@@ -96,6 +97,11 @@ const cryptoSlice = createSlice({
     });
     builder.addCase(getSingleCoinInfo.rejected, (state) => {
       state.fetchingSingleCoin = false;
+    });
+
+    // -- Chart data
+    builder.addCase(getChartData.fulfilled, (state, action) => {
+      state.priciesData = action.payload;
     });
   },
 });

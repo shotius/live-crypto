@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAppSelector } from '../../../redux/app/hook';
-import { HeadingPrimary } from '../../molecules/Headings/HeadingPrimary';
 import './styles.scss';
 
 interface CartHeaderProps {

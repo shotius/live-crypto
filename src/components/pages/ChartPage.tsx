@@ -5,11 +5,11 @@ import {
   getSingleCoinInfo,
   getChartData,
 } from '../../redux/features/cryptoSlice';
-import { ICurrency, IDateRange } from '../../redux/types';
-import { hours, weekdays, monthDays, Days } from '../../utils/constants';
+import { hours, Days } from '../../utils/constants';
 import { getDaysArray } from '../../utils/functions/getDaysArray';
 import { CointainerInner } from '../molecules/containers/CointainerInner';
 import { CoverImage } from '../molecules/covers/CoverImage';
+import { CenteredHeading } from '../molecules/headings/CenteredHeading';
 import { HorizontalScrollable } from '../molecules/wrappers/HorizontalScrollable';
 import { ButtonGroup } from '../organizms/charts/buttons/ButtonGroup';
 import { ChartPriceBig } from '../organizms/charts/ChartPriceBig';
@@ -19,17 +19,19 @@ interface ChartPageProps {}
 
 export const ChartPage: React.FC<ChartPageProps> = ({}) => {
   const [selectedCoin, setSelectedCoin] = useState<any>();
-  const [prices, setPrices] = useState<number[]>([]);
 
-  const { cryptoCoins, selectedDateRange, selectedCurrency } = useAppSelector(
-    (state) => state.coins
-  );
+  const {
+    cryptoCoins,
+    selectedDateRange,
+    selectedCurrency,
+    priciesData,
+    fetchingSingleCoin,
+  } = useAppSelector((state) => state.coins);
   const { coinId } = useParams<{ coinId: string }>();
 
   const dispatch = useAppDispatch();
 
   const days = (days: number) => {
-    console.log(days);
     const today = new Date();
     const priorDate = new Date(new Date().setDate(today.getDate() - days));
     return getDaysArray(priorDate, today);
@@ -43,7 +45,7 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
     datasets: [
       {
         label: 'Dataset 1',
-        data: prices,
+        data: priciesData,
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
@@ -61,24 +63,24 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
 
   // Get new price whenever date range changes
   useEffect(() => {
-    console.log('here');
     if (selectedCoin) {
       dispatch(
         getChartData({
           id: selectedCoin.id,
-          currency: selectedCurrency, 
+          currency: selectedCurrency,
           days: Days[selectedDateRange],
           interval: selectedDateRange === 'DAY' ? 'hourly' : 'daily',
         })
-      )
-        .unwrap()
-        .then((data) => setPrices(data))
-        .catch((error) => console.log(error));
+      );
     }
   }, [selectedDateRange, selectedCoin, selectedCurrency]);
 
   if (!selectedCoin) {
-    return <>Coin not found</>;
+    return (
+      <CenteredHeading>
+        {fetchingSingleCoin ? '...loading' : `${coinId} Coin not found`}
+      </CenteredHeading>
+    );
   }
 
   return (
@@ -92,11 +94,7 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
       </CointainerInner>
       <HorizontalScrollable>
         <CointainerInner>
-          <ChartPriceBig
-            range={selectedDateRange}
-            coin={selectedCoin}
-            data={data}
-          />
+          <ChartPriceBig coin={selectedCoin} data={data} />
         </CointainerInner>
       </HorizontalScrollable>
     </>

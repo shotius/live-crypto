@@ -15,6 +15,7 @@ export interface CrypotoState {
 
   selectedCurrency: ICurrency;
   selectedDateRange: IDateRange; 
+  priciesData: number[]
 }
 
 export interface IGetSingleCar {

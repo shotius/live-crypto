@@ -9,7 +9,6 @@ import { ErrorPage } from './components/pages/ErrorPage';
 import { HomePage } from './components/pages/HomePage';
 import { AppLayout } from './components/templates/layouts/AppLayout';
 function App() {
-  console.log('here');
   return (
     <Router>
       <AppLayout>
