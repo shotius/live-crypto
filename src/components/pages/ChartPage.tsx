@@ -5,8 +5,9 @@ import {
   getSingleCoinInfo,
   getChartData,
 } from '../../redux/features/cryptoSlice';
-import { IDateRange } from '../../redux/types';
+import { ICurrency, IDateRange } from '../../redux/types';
 import { hours, weekdays, monthDays, Days } from '../../utils/constants';
+import { getDaysArray } from '../../utils/functions/getDaysArray';
 import { CointainerInner } from '../molecules/containers/CointainerInner';
 import { CoverImage } from '../molecules/covers/CoverImage';
 import { HorizontalScrollable } from '../molecules/wrappers/HorizontalScrollable';
@@ -17,17 +18,25 @@ import './styles.scss';
 interface ChartPageProps {}
 
 export const ChartPage: React.FC<ChartPageProps> = ({}) => {
-  const [dateRange, setDateRange] = useState<IDateRange>('DAY');
   const [selectedCoin, setSelectedCoin] = useState<any>();
   const [prices, setPrices] = useState<number[]>([]);
 
-  const { cryptoCoins } = useAppSelector((state) => state.coins);
-  const { fetchingSingleCoin } = useAppSelector((state) => state.coins);
+  const { cryptoCoins, selectedDateRange, selectedCurrency } = useAppSelector(
+    (state) => state.coins
+  );
   const { coinId } = useParams<{ coinId: string }>();
+
   const dispatch = useAppDispatch();
 
+  const days = (days: number) => {
+    console.log(days);
+    const today = new Date();
+    const priorDate = new Date(new Date().setDate(today.getDate() - days));
+    return getDaysArray(priorDate, today);
+  };
+
   const labels =
-    dateRange === 'DAY' ? hours : dateRange === 'WEEK' ? weekdays : monthDays;
+    selectedDateRange === 'DAY' ? hours : days(Days[selectedDateRange]);
 
   const data = {
     labels,
@@ -52,24 +61,22 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
 
   // Get new price whenever date range changes
   useEffect(() => {
+    console.log('here');
     if (selectedCoin) {
       dispatch(
         getChartData({
           id: selectedCoin.id,
-          days: Days[dateRange],
-          interval: dateRange === 'DAY' ? 'hourly' : 'daily',
+          currency: selectedCurrency, 
+          days: Days[selectedDateRange],
+          interval: selectedDateRange === 'DAY' ? 'hourly' : 'daily',
         })
       )
         .unwrap()
         .then((data) => setPrices(data))
         .catch((error) => console.log(error));
     }
-  }, [dateRange, selectedCoin]);
+  }, [selectedDateRange, selectedCoin, selectedCurrency]);
 
-  // console.log(prices)
-  // if (fetchingSingleCoin) {
-  //   return <>...loading</>;
-  // }
   if (!selectedCoin) {
     return <>Coin not found</>;
   }
@@ -81,15 +88,15 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
         variant="medium"
       />
       <CointainerInner>
-        <ButtonGroup
-          dateRange={dateRange}
-          setDateRange={setDateRange}
-          coin={selectedCoin}
-        />
+        <ButtonGroup coin={selectedCoin} />
       </CointainerInner>
       <HorizontalScrollable>
         <CointainerInner>
-          <ChartPriceBig range={dateRange} coin={selectedCoin} data={data} />
+          <ChartPriceBig
+            range={selectedDateRange}
+            coin={selectedCoin}
+            data={data}
+          />
         </CointainerInner>
       </HorizontalScrollable>
     </>

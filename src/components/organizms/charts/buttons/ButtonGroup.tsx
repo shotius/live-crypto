@@ -1,18 +1,21 @@
 import React from 'react';
+import { useAppDispatch, useAppSelector } from '../../../../redux/app/hook';
+import {
+  setCurrency,
+  setDateRange,
+} from '../../../../redux/features/cryptoSlice';
 import { IDateRange } from '../../../../redux/types';
+import { isCurrency } from '../../../../utils/functions/typeCheckers';
 import { ButtonSqr } from '../../../molecules/buttons/ButtonRect';
 
 interface ButtonGroupProps {
   coin: any;
-  dateRange: IDateRange;
-  setDateRange: (val: IDateRange) => void;
 }
 
-export const ButtonGroup: React.FC<ButtonGroupProps> = ({
-  coin,
-  dateRange,
-  setDateRange,
-}) => {
+export const ButtonGroup: React.FC<ButtonGroupProps> = ({ coin }) => {
+  const dispatch = useAppDispatch();
+  const { selectedDateRange } = useAppSelector((state) => state.coins);
+
   return (
     <div className="header-wrap">
       <div className="coin-header">
@@ -25,26 +28,31 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({
       </div>
       <div className="button-group">
         <ButtonSqr
-          onClick={() => setDateRange('DAY')}
-          active={dateRange === 'DAY'}
+          onClick={() => dispatch(setDateRange('DAY'))}
+          active={selectedDateRange === 'DAY'}
         >
           1D
         </ButtonSqr>
         <ButtonSqr
-          onClick={() => setDateRange('WEEK')}
-          active={dateRange === 'WEEK'}
+          onClick={() => dispatch(setDateRange('WEEK'))}
+          active={selectedDateRange === 'WEEK'}
         >
           1W
         </ButtonSqr>
         <ButtonSqr
-          onClick={() => setDateRange('MONTH')}
-          active={dateRange === 'MONTH'}
+          onClick={() => dispatch(setDateRange('MONTH'))}
+          active={selectedDateRange === 'MONTH'}
         >
           1M
         </ButtonSqr>
-        <select>
-          <option>USD</option>
-          <option>EUR</option>
+        <select
+          onChange={(e) => {
+            if (isCurrency(e.currentTarget.value))
+              dispatch(setCurrency(e.currentTarget.value));
+          }}
+        >
+          <option value={'usd'}>USD</option>
+          <option value={'eur'}>EUR</option>
         </select>
       </div>
     </div>

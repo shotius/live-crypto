@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAppSelector } from '../../../redux/app/hook';
 import { HeadingPrimary } from '../../molecules/Headings/HeadingPrimary';
 import './styles.scss';
 
@@ -7,6 +8,7 @@ interface CartHeaderProps {
 }
 
 export const ChartHeader: React.FC<CartHeaderProps> = ({ coin }) => {
+  const {selectedCurrency} = useAppSelector(state => state.coins)
   return (
     <table className="chart_table">
       <tbody>
@@ -17,10 +19,10 @@ export const ChartHeader: React.FC<CartHeaderProps> = ({ coin }) => {
           <th>Current Price</th>
         </tr>
         <tr>
-          <td>USD {coin['market_data']['market_cap']['usd']}</td>
-          <td>USD {coin['market_data']['total_volume']['usd']}</td>
-          <td>USD {coin['market_data']['price_change_24h']}</td>
-          <td>USd {coin['market_data']['current_price']['usd']}</td>
+          <td>{selectedCurrency.toUpperCase()} {coin['market_data']['market_cap']['usd']}</td>
+          <td>{selectedCurrency.toUpperCase()} {coin['market_data']['total_volume']['usd']}</td>
+          <td>{selectedCurrency.toUpperCase()} {coin['market_data']['price_change_24h']}</td>
+          <td>{selectedCurrency.toUpperCase()} {coin['market_data']['current_price']['usd']}</td>
         </tr>
       </tbody>
     </table>

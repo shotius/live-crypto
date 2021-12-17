@@ -12,6 +12,9 @@ export interface CrypotoState {
   cryptoCoins: CryptoCoin[];
   fetchingCryptoCoins: boolean;
   fetchingSingleCoin: boolean;
+
+  selectedCurrency: ICurrency;
+  selectedDateRange: IDateRange; 
 }
 
 export interface IGetSingleCar {
@@ -23,3 +26,5 @@ export interface IGetSingleCar {
 
 
 export type IDateRange = 'MONTH' | 'WEEK' | 'DAY';
+
+export type ICurrency = 'usd' | 'eur'

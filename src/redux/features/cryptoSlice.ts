@@ -1,5 +1,5 @@
-import { CryptoCoin, IGetSingleCar } from './../types';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { CryptoCoin, ICurrency, IDateRange, IGetSingleCar } from './../types';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CrypotoState } from '../types';
 import cryptoServices from '../../utils/services/cryptoServices';
 
@@ -7,6 +7,9 @@ const initialState: CrypotoState = {
   cryptoCoins: [],
   fetchingCryptoCoins: false,
   fetchingSingleCoin: false,
+
+  selectedCurrency: 'usd',
+  selectedDateRange: 'DAY',
 };
 
 /**
@@ -64,7 +67,14 @@ export const getSingleCoinInfo = createAsyncThunk(
 const cryptoSlice = createSlice({
   name: 'crypto',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrency: (state, action: PayloadAction<ICurrency>) => {
+      state.selectedCurrency = action.payload;
+    },
+    setDateRange: (state, action: PayloadAction<IDateRange>) => {
+      state.selectedDateRange = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     // -- Multiple coins
     builder.addCase(getCryptoCoins.pending, (state) => {
@@ -90,5 +100,5 @@ const cryptoSlice = createSlice({
   },
 });
 
-export const {} = cryptoSlice.actions;
+export const { setCurrency, setDateRange } = cryptoSlice.actions;
 export default cryptoSlice.reducer;
