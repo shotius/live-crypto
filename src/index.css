@@ -13,9 +13,8 @@ body {
 .innerContainer {
   margin: auto;
   padding: 0;
-  margin-bottom: 200px;
   width: 100%;
-  min-width: 800px;
+  max-width: 800px;
 
   /* background-color: red; */
 }
@@ -23,7 +22,7 @@ body {
 @media only screen and (min-width: 600px) {
   .innerContainer {
     padding: 0 24px;
-    min-width: 800px;
+    max-width: 800px;
   }
 }
 

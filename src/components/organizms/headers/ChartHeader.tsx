@@ -1,11 +1,12 @@
 import React from 'react';
+import { HeadingPrimary } from '../../molecules/Headings/HeadingPrimary';
 import './styles.scss';
 
-interface ChartTableProps {
+interface CartHeaderProps {
   coin: any;
 }
 
-export const ChartTable: React.FC<ChartTableProps> = ({ coin }) => {
+export const ChartHeader: React.FC<CartHeaderProps> = ({ coin }) => {
   return (
     <table className="chart_table">
       <tbody>
@@ -13,13 +14,13 @@ export const ChartTable: React.FC<ChartTableProps> = ({ coin }) => {
           <th>Market cap</th>
           <th>Volume (24h)</th>
           <th>Price Change(24h)</th>
-          <th>Total Supply</th>
+          <th>Current Price</th>
         </tr>
         <tr>
           <td>USD {coin['market_data']['market_cap']['usd']}</td>
           <td>USD {coin['market_data']['total_volume']['usd']}</td>
           <td>USD {coin['market_data']['price_change_24h']}</td>
-          <td>USd {coin['market_data']['total_supply']}</td>
+          <td>USd {coin['market_data']['current_price']['usd']}</td>
         </tr>
       </tbody>
     </table>

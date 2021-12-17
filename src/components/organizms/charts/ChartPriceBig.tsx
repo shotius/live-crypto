@@ -6,12 +6,12 @@ import {
   LineElement,
   PointElement,
   Title,
-  Tooltip
+  Tooltip,
 } from 'chart.js';
-import faker from 'faker';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-import { ChartTable } from '../tables/ChartTable';
+import { ChartHeader } from '../headers/ChartHeader';
+import './styles.scss';
 
 ChartJS.register(
   CategoryScale,
@@ -23,6 +23,7 @@ ChartJS.register(
   Legend
 );
 
+type Options = React.ComponentType<typeof Line>;
 export const options = {
   responsive: true,
   plugins: {
@@ -49,31 +50,17 @@ export const options = {
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const data = {
-  labels,
-
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
-
 interface PriceChartBigProps {
   coin: any;
+  data: any;
 }
 
-export const ChartPriceBig: React.FC<PriceChartBigProps> = ({ coin }) => {
+export const ChartPriceBig: React.FC<PriceChartBigProps> = ({ coin, data }) => {
   return (
-    <>
-      <h1 style={{ paddingTop: '100px' }}>Prices for {coin.id}</h1>
-      <ChartTable coin={coin} />
+    <div className="wrapper">
+      <ChartHeader coin={coin} />
       <Line data={data} options={options} />
-    </>
+      <p className='x-axes'>here we are</p>
+    </div>
   );
 };

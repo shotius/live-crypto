@@ -20,3 +20,6 @@ export interface IGetSingleCar {
   days?: number;
   interval?: 'daily' | 'minutely' | 'hourly';
 }
+
+
+export type IDateRange = 'MONTH' | 'WEEK' | 'DAY';

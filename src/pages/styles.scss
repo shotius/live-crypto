@@ -1,0 +1,26 @@
+.button-group {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+}
+
+.header-wrap {
+  padding-top: 48px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.coin-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+@media only screen and (min-width: 600px) {
+  .header-wrap {
+    padding-top: 64px;
+  }
+}

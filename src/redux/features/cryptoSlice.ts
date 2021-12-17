@@ -29,12 +29,18 @@ export const getCryptoCoins = createAsyncThunk(
  * @returns {CryptoCoin | string}
  */
 export const getChartData = createAsyncThunk<
-  CryptoCoin,
+  number[],
   IGetSingleCar,
   { rejectValue: string }
 >('crypto/getChartData', async (props, { rejectWithValue }) => {
   try {
-    return await cryptoServices.getCharData(props);
+    const result = await cryptoServices.getCharData(props);
+    const rowPrices = result.prices;
+    if (rowPrices && Array.isArray(rowPrices)) {
+      const prices = rowPrices.map((row) => row[1]);
+      return prices;
+    }
+    return [];
   } catch (error) {
     return rejectWithValue('Could not get Single Coin info');
   }

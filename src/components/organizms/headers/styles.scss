@@ -1,0 +1,15 @@
+.chart_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+  td,
+  th {
+    text-align: center;
+    padding: 16px;
+  }
+  tr {
+    &:first-child {
+      background-color: #f0f0f0;
+    }
+  }
+}

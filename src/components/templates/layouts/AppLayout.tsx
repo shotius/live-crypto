@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header } from '../../organizms/Header';
+import { Footer } from '../../organizms/Footer';
+import { Header } from '../../organizms/headers/Header';
 import styles from './styles.module.scss';
 
 interface AppLayoutProps {}
@@ -9,6 +10,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
     <div className={styles.container}>
       <Header />
       {children}
+      <Footer />
     </div>
   );
 };

@@ -22,10 +22,10 @@ const getCharData = async ({
   currency = 'usd',
   days = 7,
   interval = 'daily',
-}: IGetSingleCar): Promise<CryptoCoin> => {
+}: IGetSingleCar) => {
   const url = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=${currency}&days=${days}&interval=${interval}`;
   const { data } = await axios.get(url);
-  return data as CryptoCoin;
+  return data
 };
 
 const getSingleCoinInfo = async (id: string) => {

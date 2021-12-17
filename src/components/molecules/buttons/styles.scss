@@ -1,0 +1,11 @@
+.btn-sqr-primary {
+  padding: 10px; 
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.active {
+  transform: translateY(-1px);
+  box-shadow: 2px 1px 4px lightgray;
+}
