@@ -1,12 +1,15 @@
-import React from 'react'
-import "./styles.scss"
+import React from 'react';
+import './styles.scss';
 
-interface HorizontalScrollableProps {
+interface HorizontalScrollableProps {}
 
-}
-
-export const HorizontalScrollable: React.FC<HorizontalScrollableProps> = ({children, ...rest}) => {
-    return (
-      <div {...rest} className="srcl-wrapper">{children}</div>
-    );
-}
+export const HorizontalScrollable: React.FC<HorizontalScrollableProps> = ({
+  children,
+  ...rest
+}) => {
+  return (
+    <div {...rest} className="srcl-wrapper">
+      {children}
+    </div>
+  );
+};

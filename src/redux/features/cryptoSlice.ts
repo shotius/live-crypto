@@ -1,7 +1,7 @@
 import { CryptoCoin, IGetSingleCar } from './../types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import cryptoServices from '../../utils/services/cryptoServices';
 import { CrypotoState } from '../types';
+import cryptoServices from '../../utils/services/cryptoServices';
 
 const initialState: CrypotoState = {
   cryptoCoins: [],

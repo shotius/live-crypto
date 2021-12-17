@@ -10,6 +10,7 @@ import {
 } from 'chart.js';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import { IDateRange } from '../../../redux/types';
 import { ChartHeader } from '../headers/ChartHeader';
 import './styles.scss';
 
@@ -53,14 +54,19 @@ export const options = {
 interface PriceChartBigProps {
   coin: any;
   data: any;
+  range: IDateRange;
 }
 
-export const ChartPriceBig: React.FC<PriceChartBigProps> = ({ coin, data }) => {
+export const ChartPriceBig: React.FC<PriceChartBigProps> = ({
+  coin,
+  data,
+  range,
+}) => {
   return (
     <div className="wrapper">
       <ChartHeader coin={coin} />
       <Line data={data} options={options} />
-      <p className='x-axes'>here we are</p>
+      <p className="x-axes">{range === 'DAY' ? 'Hours' : 'Days'}</p>
     </div>
   );
 };

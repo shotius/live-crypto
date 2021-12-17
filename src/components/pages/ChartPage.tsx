@@ -1,16 +1,17 @@
-import faker from 'faker';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CointainerInner } from '../components/molecules/containers/CointainerInner';
-import { CoverImage } from '../components/molecules/covers/CoverImage';
-import { HorizontalScrollable } from '../components/molecules/wrappers/HorizontalScrollable';
-import { ButtonGroup } from '../components/organizms/charts/buttons/ButtonGroup';
-import { ChartPriceBig } from '../components/organizms/charts/ChartPriceBig';
-import { useAppDispatch, useAppSelector } from '../redux/app/hook';
-import { getChartData, getSingleCoinInfo } from '../redux/features/cryptoSlice';
-import { IDateRange } from '../redux/types';
-import { hours, weekdays, monthDays, Days } from '../utils/constants';
-import { range } from '../utils/functions/range';
+import { useAppSelector, useAppDispatch } from '../../redux/app/hook';
+import {
+  getSingleCoinInfo,
+  getChartData,
+} from '../../redux/features/cryptoSlice';
+import { IDateRange } from '../../redux/types';
+import { hours, weekdays, monthDays, Days } from '../../utils/constants';
+import { CointainerInner } from '../molecules/containers/CointainerInner';
+import { CoverImage } from '../molecules/covers/CoverImage';
+import { HorizontalScrollable } from '../molecules/wrappers/HorizontalScrollable';
+import { ButtonGroup } from '../organizms/charts/buttons/ButtonGroup';
+import { ChartPriceBig } from '../organizms/charts/ChartPriceBig';
 import './styles.scss';
 
 interface ChartPageProps {}
@@ -33,7 +34,7 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
     datasets: [
       {
         label: 'Dataset 1',
-        data: prices, 
+        data: prices,
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
@@ -65,10 +66,10 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
     }
   }, [dateRange, selectedCoin]);
 
-  console.log(prices)
-  if (fetchingSingleCoin) {
-    return <>...loading</>;
-  }
+  // console.log(prices)
+  // if (fetchingSingleCoin) {
+  //   return <>...loading</>;
+  // }
   if (!selectedCoin) {
     return <>Coin not found</>;
   }
@@ -88,7 +89,7 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
       </CointainerInner>
       <HorizontalScrollable>
         <CointainerInner>
-          <ChartPriceBig coin={selectedCoin} data={data} />
+          <ChartPriceBig range={dateRange} coin={selectedCoin} data={data} />
         </CointainerInner>
       </HorizontalScrollable>
     </>
