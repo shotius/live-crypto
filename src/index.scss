@@ -40,12 +40,51 @@
   }
 }
 
-.roboto-heading {
+
+.text__heading--roboto {
   font-family: 'Roboto';
   font-weight: 500;
 }
 
-.roboto-text {
+.text__paragraph--roboto {
   font-family: 'Roboto';
-  font-weight: 200;
+  font-weight: 200 ;
+}
+
+
+
+/** Animations */
+
+@mixin animate__slide-in-left {
+  position: absolute;
+  top: 100px;
+  left: -100px;
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 2s;
+  animation: slide 0.5s forwards;
+}
+
+.animate--easyload {
+  opacity: 0;
+  transition: all 1.2s ease;
+}
+
+.animate__slide-in-left--slow {
+  @include animate__slide-in-left;
+  animation-delay: 0.2s;
+  opacity: .4;
+}
+
+.animate {
+  @include animate__slide-in-left;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+
+@keyframes slide {
+  100% {
+    left: 0;
+    opacity: 1;
+  }
 }

@@ -14,16 +14,16 @@ export const CoinsTable: React.FC<CoinsTableProps> = ({ coins }) => {
     <table className="coins_table">
       <tbody>
         <tr>
-          <th className='roboto-heading'>Coin</th>
-          <th className='roboto-heading'>7 day graph</th>
-          <th className='roboto-heading'>Price</th>
-          <th className='roboto-heading'>24h</th>
-          <th className='roboto-heading'>market cap</th>
+          <th className='text__heading--roboto'>Coin</th>
+          <th className='text__heading--roboto'>7 day graph</th>
+          <th className='text__heading--roboto'>Price</th>
+          <th className='text__heading--roboto'>24h</th>
+          <th className='text__heading--roboto'>market cap</th>
         </tr>
         {coins.map((coin) => (
           <tr
             key={coin.id}
-            className="roboto-text"
+            className="text__paragraph--roboto"
             onClick={() => navigate(`/live/${coin.id}`)}
           >
             <td

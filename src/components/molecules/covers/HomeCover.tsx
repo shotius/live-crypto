@@ -8,13 +8,13 @@ interface CoverFullProps {
 
 export const HomeCover: React.FC<CoverFullProps> = ({ image, variant }) => {
   return (
-    <div className={variant === 'full' ? 'cover_full' : 'cover_medium'}>
+    <div className={variant === 'full' ? 'cover--full' : 'cover--medium '}>
       <img
         width="100%"
         height="100%"
         src={image}
         loading="lazy"
-        className="easyload"
+        className="animate--easyload"
         onLoad={(e) => {
           e.currentTarget.style.opacity = '1';
         }}
@@ -29,7 +29,7 @@ export const HomeCover: React.FC<CoverFullProps> = ({ image, variant }) => {
         }}
       >
         <h1
-          className="animateLeft"
+          className="animate__slide-in-left--slow"
           style={{
             fontSize: '64px',
             padding: '16px 0px',
