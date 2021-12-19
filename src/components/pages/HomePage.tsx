@@ -6,6 +6,7 @@ import { CointainerInner } from '../molecules/containers/CointainerInner';
 import { CoverImage } from '../molecules/covers/CoverImage';
 import { HorizontalScrollable } from '../molecules/wrappers/HorizontalScrollable';
 import { CoinsTable } from '../organizms/tables/CoinsTable';
+import homeHero from '../../assets/home-hero.png';
 
 interface HomePageProps {}
 
@@ -21,10 +22,7 @@ export const HomePage: React.FC<HomePageProps> = ({}) => {
 
   return (
     <>
-      <CoverImage
-        variant="full"
-        image="https://incyber.fr/wp-content/uploads/2021/08/ARTICLE-CRYPTO-2-1.png"
-      />
+      <CoverImage variant="full" image={homeHero} />
       <HorizontalScrollable>
         <CointainerInner>
           <CoinsTable coins={coins} />

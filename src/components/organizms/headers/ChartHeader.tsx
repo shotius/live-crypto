@@ -1,3 +1,4 @@
+import isEqual from 'lodash.isequal';
 import React from 'react';
 import { useAppSelector } from '../../../redux/app/hook';
 import './styles.scss';
@@ -7,7 +8,11 @@ interface CartHeaderProps {
 }
 
 export const ChartHeader: React.FC<CartHeaderProps> = ({ coin }) => {
-  const { selectedCurrency: cur } = useAppSelector((state) => state.coins);
+  const { selectedCurrency: cur } = useAppSelector(
+    (state) => state.coins,
+    isEqual
+  );
+  
   return (
     <table className="chart_table">
       <tbody>

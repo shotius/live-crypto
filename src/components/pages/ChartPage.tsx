@@ -10,6 +10,7 @@ import { CenteredHeading } from '../molecules/headings/CenteredHeading';
 import { HorizontalScrollable } from '../molecules/wrappers/HorizontalScrollable';
 import { ButtonGroup } from '../organizms/charts/buttons/ButtonGroup';
 import ChartPriceBig from '../organizms/charts/ChartPriceBig';
+import ChartHero from '../../assets/chart-hero.jpg';
 import './styles.scss';
 
 interface ChartPageProps {}
@@ -60,10 +61,7 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
 
   return (
     <>
-      <CoverImage
-        image="https://wallpaperbat.com/img/641683-bitcoin-cryptocurrency-4k-wallpaper-mocah-hd-wallpaper.jpg"
-        variant="medium"
-      />
+      <CoverImage image={ChartHero} variant="medium" />
       <CointainerInner>
         <ButtonGroup coin={selectedCoin} />
       </CointainerInner>
