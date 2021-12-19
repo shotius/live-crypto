@@ -53,6 +53,7 @@ export const useChartdata = (selectedCoin: any): IChartData => {
 
   // -- This value is memoized (exported)
   const data = useMemo(() => {
+
     return {
       labels,
       datasets: [
@@ -67,7 +68,7 @@ export const useChartdata = (selectedCoin: any): IChartData => {
         },
       ],
     };
-  }, [priciesData, labels]);
+  }, [priciesData, labels, pointColors]);
 
   // -- Chart options
   const options: ChartOptions = {

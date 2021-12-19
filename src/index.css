@@ -1,4 +1,4 @@
-body {
+* {
   margin: 0px;
   padding: 0px;
 }
@@ -38,4 +38,14 @@ body {
     max-width: 1180px;
     padding: 0 24px;
   }
+}
+
+.roboto-heading {
+  font-family: 'Roboto';
+  font-weight: 500;
+}
+
+.roboto-text {
+  font-family: 'Roboto';
+  font-weight: 200;
 }

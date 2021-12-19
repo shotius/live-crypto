@@ -12,17 +12,17 @@ export const ChartHeader: React.FC<CartHeaderProps> = ({ coin }) => {
     (state) => state.coins,
     isEqual
   );
-  
+
   return (
     <table className="chart_table">
       <tbody>
         <tr>
-          <th>Market cap</th>
-          <th>Volume (24h)</th>
-          <th>Price Change(24h)</th>
-          <th>Current Price</th>
+          <th className='roboto-heading'>Market cap</th>
+          <th className='roboto-heading'>Volume (24h)</th>
+          <th className='roboto-heading'>Price Change(24h)</th>
+          <th className='roboto-heading'>Current Price</th>
         </tr>
-        <tr>
+        <tr className='roboto-text'>
           <td>
             {cur.toUpperCase()} {coin['market_data']['market_cap'][cur]}
           </td>

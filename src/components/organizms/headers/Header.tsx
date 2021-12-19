@@ -9,12 +9,12 @@ export const Header: React.FC<HeaderProps> = ({}) => {
   return (
     <div className="headerContainer">
       <nav>
-        <ul>
-          <li>
+        <ul >
+          <li className='roboto-text'>
             <Link to="/" className="cryptoLogo">Logo</Link>
           </li>
-          <li>
-            <ButtonPrimary>Log in</ButtonPrimary>
+          <li className='roboto-text'>
+            <ButtonPrimary >Log in</ButtonPrimary>
           </li>
         </ul>
       </nav>

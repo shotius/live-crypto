@@ -6,6 +6,6 @@ export const CenteredHeading: React.FC<CenteredHeadingProps> = ({
   children,
 }) => {
   return (
-    <h1 style={{ paddingTop: '200px', textAlign: 'center' }}>{children}</h1>
+    <h1 style={{ paddingTop: '100px', textAlign: 'center' }} className='roboto-text'>{children}</h1>
   );
 };

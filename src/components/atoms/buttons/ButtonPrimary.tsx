@@ -8,7 +8,7 @@ export const ButtonPrimary: React.FC<buttonPrimaryProps> = ({
   ...rest
 }) => {
   return (
-    <button className="btn-primary" {...rest}>
+    <button className="btn-primary roboto-text" {...rest}>
       {children}
     </button>
   );

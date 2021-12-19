@@ -9,19 +9,23 @@ interface CoinsTableProps {
 
 export const CoinsTable: React.FC<CoinsTableProps> = ({ coins }) => {
   const navigate = useNavigate();
-  
+
   return (
     <table className="coins_table">
       <tbody>
         <tr>
-          <th>Coin</th>
-          <th>7 day graph</th>
-          <th>Price</th>
-          <th>24h</th>
-          <th>market cap</th>
+          <th className='roboto-heading'>Coin</th>
+          <th className='roboto-heading'>7 day graph</th>
+          <th className='roboto-heading'>Price</th>
+          <th className='roboto-heading'>24h</th>
+          <th className='roboto-heading'>market cap</th>
         </tr>
         {coins.map((coin) => (
-          <tr key={coin.id} onClick={() => navigate(`/live/${coin.id}`)}>
+          <tr
+            key={coin.id}
+            className="roboto-text"
+            onClick={() => navigate(`/live/${coin.id}`)}
+          >
             <td
               style={{
                 display: 'flex',

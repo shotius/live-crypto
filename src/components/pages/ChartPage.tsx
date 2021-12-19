@@ -5,13 +5,14 @@ import { useAppDispatch, useAppSelector } from '../../redux/app/hook';
 import { getSingleCoinInfo } from '../../redux/features/cryptoSlice';
 import { useChartdata } from '../../utils/hooks/useChartData';
 import { CointainerInner } from '../molecules/containers/CointainerInner';
-import { CoverImage } from '../molecules/covers/CoverImage';
+import { HomeCover } from '../molecules/covers/HomeCover';
 import { CenteredHeading } from '../molecules/headings/CenteredHeading';
 import { HorizontalScrollable } from '../molecules/wrappers/HorizontalScrollable';
 import { ButtonGroup } from '../organizms/charts/buttons/ButtonGroup';
 import ChartPriceBig from '../organizms/charts/ChartPriceBig';
 import ChartHero from '../../assets/chart-hero.jpg';
 import './styles.scss';
+import { ChartPageCover } from '../molecules/covers/CharPageCover';
 
 interface ChartPageProps {}
 
@@ -61,7 +62,7 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
 
   return (
     <>
-      <CoverImage image={ChartHero} variant="medium" />
+      <ChartPageCover image={ChartHero} />
       <CointainerInner>
         <ButtonGroup coin={selectedCoin} />
       </CointainerInner>
