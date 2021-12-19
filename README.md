@@ -1,2 +1,4 @@
-### Yarn
-### Yarn start
+# Live Crypto
+
+### npm i
+### npm run dev 
