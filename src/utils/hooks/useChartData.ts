@@ -16,9 +16,12 @@ interface IChartData {
 }
 
 export const useChartdata = (selectedCoin: any): IChartData => {
+ 
+  // -----------------------Imports -----------------
   const { selectedDateRange, selectedCurrency, priciesData, savedPrices } =
     useAppSelector((state) => state.coins, isEqual); // lodash equal is crutial here
   const dispatch = useAppDispatch();
+
 
   // -------------------- Utill functions -------------
   const days = (days: number) => {
@@ -39,6 +42,10 @@ export const useChartdata = (selectedCoin: any): IChartData => {
   );
   // ---------------------- Util function end -------------
 
+
+
+  // ----------------- Export Functions ----------
+
   // -- Fetches new new price data (exported)
   const getPrices = () => {
     dispatch(
@@ -53,7 +60,6 @@ export const useChartdata = (selectedCoin: any): IChartData => {
 
   // -- This value is memoized (exported)
   const data = useMemo(() => {
-
     return {
       labels,
       datasets: [
