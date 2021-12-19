@@ -1,12 +1,9 @@
 import isEqual from 'lodash.isequal';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/app/hook';
-import {
-  getChartData, getSingleCoinInfo
-} from '../../redux/features/cryptoSlice';
-import { Days, hours } from '../../utils/constants';
-import { getDaysArray } from '../../utils/functions/getDaysArray';
+import { getSingleCoinInfo } from '../../redux/features/cryptoSlice';
+import { useChartdata } from '../../utils/hooks/useChartData';
 import { CointainerInner } from '../molecules/containers/CointainerInner';
 import { CoverImage } from '../molecules/covers/CoverImage';
 import { CenteredHeading } from '../molecules/headings/CenteredHeading';
@@ -19,65 +16,19 @@ interface ChartPageProps {}
 
 export const ChartPage: React.FC<ChartPageProps> = ({}) => {
   const [selectedCoin, setSelectedCoin] = useState<any>();
+
   const { coinId } = useParams<{ coinId: string }>();
+  const { getPrices, data } = useChartdata(selectedCoin);
 
   const {
     cryptoCoins,
     selectedDateRange,
     selectedCurrency,
-    priciesData,
     fetchingSingleCoin,
-    savedPrices,
   } = useAppSelector((state) => state.coins, isEqual);
   const dispatch = useAppDispatch();
 
-
-  const days = (days: number) => {
-    const today = new Date();
-    const priorDate = new Date(new Date().setDate(today.getDate() - days));
-    return getDaysArray(priorDate, today);
-  };
-
-  const labels =
-    selectedDateRange === 'DAY' ? hours : days(Days[selectedDateRange]);
-
-  const isSavedPrice = (pr: number) => {
-    return savedPrices.find((price) => price === pr);
-  };
-
-  const pointColors = priciesData.map((price) =>
-    isSavedPrice(price) ? 'red' : '#fff'
-  );
-
-  const data = useMemo(() => {
-    return {
-      labels,
-      datasets: [
-        {
-          label: selectedCoin,
-          data: priciesData,
-          borderColor: 'rgb(53, 162, 235)',
-          backgroundColor: 'rgba(53, 162, 235, 0.5)',
-          pointBackgroundColor: pointColors,
-          lineTension: 0.1,
-          pointHoverRadius: 5,
-        },
-      ],
-    };
-  }, [priciesData, labels]);
-
-  const getPrices = () => {
-    dispatch(
-      getChartData({
-        id: selectedCoin.id,
-        currency: selectedCurrency,
-        days: Days[selectedDateRange],
-        interval: selectedDateRange === 'DAY' ? 'hourly' : 'daily',
-      })
-    );
-  };
-
-  // On the firest load get Crypto coin info
+  // -- On the first render get Crypto coin info
   useEffect(() => {
     if (!cryptoCoins.length && coinId) {
       dispatch(getSingleCoinInfo(coinId))
@@ -86,10 +37,9 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
     }
   }, []);
 
-  // Get new price whenever date range changes
+  // -- Gettin data in 5 sec interval
   useEffect(() => {
     let id = 0;
-    console.log('here');
     if (selectedCoin && selectedCurrency && selectedDateRange) {
       getPrices();
       id = setInterval(() => {
@@ -99,6 +49,7 @@ export const ChartPage: React.FC<ChartPageProps> = ({}) => {
     return () => clearInterval(id);
   }, [selectedDateRange, selectedCoin, selectedCurrency]);
 
+  // -- If crypto coin is not fetched yet -> spinner
   if (!selectedCoin) {
     return (
       <CenteredHeading>
