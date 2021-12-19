@@ -19,28 +19,11 @@ export const HomeCover: React.FC<CoverFullProps> = ({ image, variant }) => {
           e.currentTarget.style.opacity = '1';
         }}
       />
-      <div
-        style={{
-          color: 'white',
-          position: 'absolute',
-          width: '45%',
-          top: '49%',
-          left: '10%',
-        }}
-      >
-        <h1
-          className="animate__slide-in-left--slow"
-          style={{
-            fontSize: '64px',
-            padding: '16px 0px',
-            marginBottom: '10px',
-            fontFamily: 'Roboto, sans-serif',
-            fontWeight: "400"
-          }}
-        >
+      <div className="wrap__cover-home -c-white -p-absolute">
+        <h1 className="animate__slide-in-left--slow t__heading--400 -size-l top-10">
           Lorem Ipsum
         </h1>
-        <p style={{ width: '100%',    fontFamily: 'Roboto, sans-serif', fontWeight: "300" }} className="animate">
+        <p className="t_paragraph--200  animate__slide-in-left--fast">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus
           assumenda tempore fugiat commodi laborum voluptas, dolore officiis
           autem numquam fuga molestiae enim corporis porro harum rem minus,

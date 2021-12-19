@@ -52,7 +52,7 @@ const ChartPriceBig: React.FC<PriceChartBigProps> = (props) => {
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrap__chart--big">
       <ChartHeader coin={coin} />
       <Line data={data} options={options} onClick={onClick} ref={lineRef} />
     </div>

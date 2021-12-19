@@ -26,7 +26,7 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = React.memo(
           <div>
             <img src={coin.image.large} width="60px" height="60px" />
           </div>
-          <h1 style={{ alignSelf: 'end', margin: '0px 0px 10px' }} className='text__heading--roboto'>
+          <h1 className='t_heading--500 t__heading--price'>
             {coin.name} price
           </h1>
         </div>

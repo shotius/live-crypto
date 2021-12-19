@@ -1,9 +1,9 @@
-.wrapper {
+.wrap__chart--big {
   min-width: 700px;
 }
 
 @media only screen and (min-width: 600px) {
-  .wrapper {
+  .wrap__chart--big {
     min-width: 800px;
   }
 }

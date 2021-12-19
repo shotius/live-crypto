@@ -5,5 +5,5 @@ interface CointainerInnerProps {}
 export const CointainerInner: React.FC<CointainerInnerProps> = ({
   children,
 }) => {
-  return <div className="innerContainer">{children}</div>;
+  return <div className="wrap__inner">{children}</div>;
 };

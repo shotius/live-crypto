@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles.scss';
 
 interface CenteredHeadingProps {}
 
@@ -6,6 +7,8 @@ export const CenteredHeading: React.FC<CenteredHeadingProps> = ({
   children,
 }) => {
   return (
-    <h1 style={{ paddingTop: '100px', textAlign: 'center' }} className='text__paragraph--roboto'>{children}</h1>
+    <h1 className=" t__heading--centered--big t_paragraph--200 ">
+      {children}
+    </h1>
   );
 };

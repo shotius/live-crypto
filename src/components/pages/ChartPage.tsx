@@ -7,12 +7,12 @@ import { useChartdata } from '../../utils/hooks/useChartData';
 import { CointainerInner } from '../molecules/containers/CointainerInner';
 import { HomeCover } from '../molecules/covers/HomeCover';
 import { CenteredHeading } from '../molecules/headings/CenteredHeading';
-import { HorizontalScrollable } from '../molecules/wrappers/HorizontalScrollable';
 import { ButtonGroup } from '../organizms/charts/buttons/ButtonGroup';
 import ChartPriceBig from '../organizms/charts/ChartPriceBig';
 import ChartHero from '../../assets/chart-hero.jpg';
 import './styles.scss';
 import { ChartPageCover } from '../molecules/covers/CharPageCover';
+import { HorizontalScrollable } from '../molecules/wrappers/HorizontalScrollable';
 
 interface ChartPageProps {}
 

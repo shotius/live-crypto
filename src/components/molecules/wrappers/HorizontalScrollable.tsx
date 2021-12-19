@@ -8,7 +8,7 @@ export const HorizontalScrollable: React.FC<HorizontalScrollableProps> = ({
   ...rest
 }) => {
   return (
-    <div {...rest} className="srcl-wrapper">
+    <div {...rest} className="wrap__scroll--horizontal">
       {children}
     </div>
   );

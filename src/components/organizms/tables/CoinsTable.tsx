@@ -14,25 +14,19 @@ export const CoinsTable: React.FC<CoinsTableProps> = ({ coins }) => {
     <table className="coins_table">
       <tbody>
         <tr>
-          <th className='text__heading--roboto'>Coin</th>
-          <th className='text__heading--roboto'>7 day graph</th>
-          <th className='text__heading--roboto'>Price</th>
-          <th className='text__heading--roboto'>24h</th>
-          <th className='text__heading--roboto'>market cap</th>
+          <th className="t_heading--500">Coin</th>
+          <th className="t_heading--500">7 day graph</th>
+          <th className="t_heading--500">Price</th>
+          <th className="t_heading--500">24h</th>
+          <th className="t_heading--500">market cap</th>
         </tr>
         {coins.map((coin) => (
           <tr
             key={coin.id}
-            className="text__paragraph--roboto"
+            className="t_paragraph--200"
             onClick={() => navigate(`/live/${coin.id}`)}
           >
-            <td
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '16px',
-              }}
-            >
+            <td className="-d-flex -align-center text__crypto-table--id">
               <img src={coin.image} width="35px" />
               {coin.name}
             </td>

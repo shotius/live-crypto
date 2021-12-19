@@ -10,7 +10,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.innerContainer {
+.wrap__inner {
   margin: auto;
   padding: 0;
   width: 100%;
@@ -20,44 +20,85 @@
 }
 
 @media only screen and (min-width: 600px) {
-  .innerContainer {
+  .wrap__inner {
     padding: 0 24px;
     max-width: 800px;
   }
 }
 
 @media only screen and (min-width: 900px) {
-  .innerContainer {
+  .wrap__inner {
     max-width: 80%;
     padding: 0 24px;
   }
 }
 
 @media only screen and (min-width: 1380px) {
-  .innerContainer {
+  .wrap__inner {
     max-width: 1180px;
     padding: 0 24px;
   }
 }
 
-
-.text__heading--roboto {
+.t_heading--500 {
   font-family: 'Roboto';
   font-weight: 500;
 }
 
-.text__paragraph--roboto {
+.t__heading--400 {
+  font-family: 'Roboto';
+  font-weight: 400;
+}
+
+.-size-l {
+  font-size: 64px;
+}
+
+.top-10 {
+  top: 10px;
+}
+
+
+.t_paragraph--200 {
   font-family: 'Roboto';
   font-weight: 200 ;
 }
 
+.-w-half {
+  width: 45%;
+}
+
+.-c-white {
+  color: white
+}
+
+.-p-absolute {
+  position: absolute;
+}
+
+.-d-flex {
+  display: flex;
+}
 
 
+.t__heading--centered--big {
+  padding-top: 100px;
+  text-align: center;
+}
+
+.-pt-big {
+  padding-top: 200px;
+}
+
+.-align-center {
+  align-items: center;
+}
+
+/////////////////////
 /** Animations */
 
 @mixin animate__slide-in-left {
   position: absolute;
-  top: 100px;
   left: -100px;
   -webkit-animation: slide 0.5s forwards;
   -webkit-animation-delay: 2s;
@@ -75,12 +116,12 @@
   opacity: .4;
 }
 
-.animate {
+.animate__slide-in-left--fast {
   @include animate__slide-in-left;
+  top: 100px;
   animation-delay: 0.3s;
   opacity: 0;
 }
-
 
 @keyframes slide {
   100% {

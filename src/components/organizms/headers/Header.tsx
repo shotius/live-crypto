@@ -10,7 +10,7 @@ export const Header: React.FC<HeaderProps> = ({}) => {
     <div className="headerContainer">
       <nav>
         <ul >
-          <li className='text__paragraph--roboto'>
+          <li className='t_paragraph--200'>
             <Link to="/" className="cryptoLogo">Logo</Link>
           </li>
           <li>
